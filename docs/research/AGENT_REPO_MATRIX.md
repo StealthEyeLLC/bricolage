@@ -16,29 +16,42 @@ Bricolage does NOT aim to maximize enterprise abstraction layers, governance bur
 
 ---
 
-# Comparative Matrix - Passes 1-4
+# Comparative Matrix - Passes 1-5
 
 | Repo / System | Primary Categories | Key Innovations | Friction / Complexity | Synthesis Candidates | Initial Bricolage Judgment |
 |---|---|---|---|---|---|
 | OpenHands / OpenHands SDK | Software Engineering Agents; Environment Interaction; Tooling; Runtime; Human Interaction | Composable software-agent SDK; sandboxed execution; local-to-remote portability; REST/WebSocket services; visual workspace, CLI, API interfaces; model-agnostic routing; lifecycle control; security analysis; SWE-Bench and GAIA orientation. | Larger system surface than lightweight agents; production-grade execution/sandbox design brings real complexity. | Sandboxed execution layer; software-agent harness; lifecycle model; workspace interface abstraction; remote/cloud execution pattern; model routing boundary. | Very high-value. Do not copy whole stack blindly, but this is one of the strongest candidates for execution/runtime architecture. |
 | Codex Cloud / GitHub Agent Workflows | Software Engineering Agents; Human Interaction; Infrastructure; Runtime | Cloud coding-agent workflow through ChatGPT, GitHub, mobile/web, issues/PRs, and cloud sandboxes; positioned as broader enterprise agent substrate beyond coding. | Platform-dependent; not an OSS primitive, but it is the actual operational substrate for Bricolage. | ChatGPT-to-Codex-to-GitHub loop; issue/PR assignment pattern; mobile operator control; repository as persistent state. | Critical operating assumption. Bricolage should be optimized for this conversational cloud loop, not local-machine assumptions. |
+| Confucius Code Agent / Confucius SDK | Software Engineering Agents; Runtime; Memory; Tooling; Learning | Industrial-scale OSS coding agent and SDK with unified orchestrator, hierarchical working memory, persistent note-taking across sessions, modular extension system, and meta-agent build-test-improve loop; reports 54.3% Resolve@1 on SWE-Bench-Pro. | New/large system; needs repo/license/maturity inspection. High ambition can hide complexity. | Hierarchical working memory; persistent note system; meta-agent agent-config refinement; industrial repo-scale coding loop. | Very high-signal. Must inspect deeply; may be one of the strongest SWE synthesis sources. |
 | DSPy | Cognition & Reasoning; Models, Context & Inference; Evaluation | Declarative LM programs; modules instead of prompt strings; optimizers/compilers; metric-driven prompt/program improvement; assertions for constraint-guided refinement. | Requires adopting a programming model; optimizer/eval loops can become overbuilt if used everywhere. | Declarative cognitive modules; prompt/program compilation; assertions as lightweight verification; metric-driven tuning for reusable reasoning modules. | Essential cognition primitive. Use selectively for high-value reasoning pipelines, not every chat turn. |
+| Blueprint First / Source Code Agent | Runtime; Cognition; Safety; Evaluation | Deterministic workflow paradigm: expert-defined source-code execution blueprint controls procedure while LLM is invoked only for bounded subtasks; improved tau-bench performance and efficiency. | Less flexible for open-ended tasks; requires explicit procedural modeling. | Blueprint-first execution; model-as-bounded-tool; deterministic workflow spine; verifiable procedural agents. | Extremely important counterweight to fully generative agents. Steal for operational workflows. |
+| AlphaEvolve | Learning; Software Engineering Agents; Cognition; Evaluation | Evolutionary coding agent that uses LLMs to generate algorithm variants and selects via explicit evaluation functions/metrics; general-purpose algorithm discovery framing. | Not open-source in the same sense; requires good evaluators and compute. | Generate-variant-evaluate-select loop; metric-driven algorithm improvement; evolutionary search over code/strategies. | Important synthesis primitive for self-improvement and algorithmic search, not immediate runtime. |
 | Pydantic AI | Runtime; Tooling; Models, Context & Inference; Data/State Architecture | Python agent framework from the Pydantic ecosystem emphasizing type-safe agents, structured outputs, dependency injection, validation, and model-provider abstraction. | Framework maturity and lock-in need inspection; type rigor can slow exploratory work if over-applied. | Typed agent contracts; schema-first tool/result validation; dependency injection; structured output boundary. | Strong candidate for low-friction Python agent skeleton if used surgically. |
 | Semantic Kernel | Runtime; Skills; Tooling; Memory; Multi-Agent | Microsoft open-source SDK for AI orchestration, plugins, planners/functions, memory/connectors, MCP integration, Azure/OpenAI/local models, and agent abstractions. | Enterprise/cloud ecosystem gravity; can become heavy if Azure-first assumptions dominate. | Skill/plugin model; planner/function abstractions; MCP integration patterns; connector architecture. | Useful as a reference for plugin/connectors and enterprise integration, not necessarily core runtime. |
 | CrewAI | Multi-Agent Coordination; Runtime & Orchestration; Skills; Tooling | Role/task/crew abstraction; collaborative agent teams; Flows for controlled event-driven workflows; memory, tools, knowledge/RAG integration; MIT licensed; active 2026 release line. | Can become role-play orchestration theater if overused; enterprise layer may add overhead. | Crew/task vocabulary; role-specialized agents; simple collaborative workflows; task delegation pattern. | Useful multi-agent vocabulary. Synthesize primitives, avoid adopting heavy crew formalism unless it proves useful. |
+| CAMEL | Multi-Agent Coordination; Cognition; Evaluation; Research | Large open-source multi-agent research framework around communicative agents, role-playing, agent societies, simulations, and cooperative task-solving. | Role-play/social simulation can become theatrical if not tied to execution outcomes. | Communicative agent protocols; agent society simulation; role-play as controlled research tool; task decomposition dialogues. | Important multi-agent research source. Use for coordination primitives, not default execution. |
+| MetaGPT | Multi-Agent Coordination; Software Engineering Agents; Runtime | Multi-agent software company metaphor: product manager, architect, engineer, QA roles; SOP-driven collaboration for software generation. | Heavy role simulation; risk of process theater; may overfit to software-project metaphors. | Standard operating procedure patterns; role-specific artifacts; handoff contracts between planning/design/code/test. | Worth extracting artifact/handoff structure, not full company simulation. |
 | AutoGen / AutoGen Studio | Multi-Agent Coordination; Human Interaction; Observability & Evaluation; Runtime | Multi-agent conversational workflows; declarative JSON-based agent specs; no-code/visual workflow building; debugging/evaluation UI; reusable component gallery. | Multi-agent conversation systems can become hard to debug; studio/no-code layer may not fit Bricolage's repo-first flow. | Declarative agent definitions; inspectable conversation graphs; reusable agent components; debugging UI concepts. | Strong ideas for agent interaction protocols and debugging. Probably not the central runtime. |
+| AutoGPT / AutoGPT Forge | Runtime; Tooling; Historical Baseline; Agent Platform | Early autonomous goal decomposition with tools, browsing, file management; later ecosystem includes Forge/platform ideas for building agents and marketplace-like agent composition. | Known issues: loops, hallucination, high cost, brittle autonomy; early architecture became cautionary. | Avoid unconstrained goal loops; extract marketplace/platform lessons only after vetting; bounded task decomposition. | Mostly a cautionary ancestor, but Forge/platform layer deserves inspection. |
+| BabyAGI | Cognition; Runtime; Memory; Historical Baseline | Minimal autonomous task loop with task creation, prioritization, execution, and memory/vector-store style persistence. | Too simple for robust agents; loops/prioritization can drift. | Minimal task-loop archetype; task queue/prioritization; simple memory loop. | Historical primitive. Useful for understanding the bare minimum agent loop. |
+| SuperAGI | Runtime; Tooling; Human Interaction; Agent Platform | Open-source autonomous agent platform with GUI, agent provisioning, toolkits, memory/vector DB integrations, and marketplace-style extensions. | Platform surface and GUI can add friction; may be less relevant than modern primitives. | Agent provisioning UI; tool marketplace concept; memory/toolkit integration patterns. | Large historical platform to inspect for what not to overbuild, plus marketplace ideas. |
 | AgentSPEX | Runtime & Orchestration; Infrastructure/State; Evaluation; Skills | Explicit agent workflow specification language; typed steps; branching/loops; parallel execution; reusable submodules; explicit state; harness with tools, sandbox, checkpointing, verification, logging; visual graph/workflow editor. | A new DSL can be friction if too much is formalized too soon. | Explicit workflow/state language; typed steps; portable workflow specs; checkpointing without enterprise bloat; visual/graph inspection concept. | Very important 2026 direction. Consider Bricolage-native lightweight spec format rather than adopting full DSL immediately. |
 | Agentproof | Safety; Evaluation; Runtime; State Architecture | Static verification of agent workflow graphs extracted from LangGraph, CrewAI, AutoGen, and Google ADK; checks structural defects and temporal safety policies before runtime. | Verification DSL could become ceremony if overused. Static verification only helps graph-structured workflows. | Lightweight preflight checks for graph topology; unreachable/dead-end detection; human-gate policy checks; witness traces. | Excellent lean safety primitive: verify structure, not bureaucracy. Add when Bricolage has graph workflows. |
 | AgentGit | Runtime & Orchestration; Infrastructure/State; Observability; Evaluation | Git-like commit/revert/branching for multi-agent workflows; trajectory branching; A/B exploration; reduced redundant computation/token usage; built atop LangGraph. | Adds state-versioning layer; may be overkill for simple tasks. | Git-like agent state commits; branchable trajectories; rollback/replay; compare alternate reasoning/action paths. | Extremely aligned with GitHub/repo-native Bricolage. Strong primitive candidate. |
 | MCP | Tooling & Action Systems; Protocols; Infrastructure; Knowledge & Retrieval | Open standard for model/tool/data integration; JSON-RPC; broad provider adoption including OpenAI and Google DeepMind; reference servers; ChatGPT app support. | Security boundaries are nontrivial; tool execution can be dangerous without whitelisting/schema validation; ecosystem quality varies. | Standard tool/data connector boundary; MCP server registry; permissioned tool invocation; schema-bound tool access. | Essential protocol layer. Adopt as a boundary, but wrap with Bricolage trust/permission model. |
 | AGENTS.md standard | Skills; Software Engineering Agents; Human Interaction; Protocols | Repo-native instruction format for coding agents; public reports describe broad adoption and Linux Foundation/AAIF contribution alongside MCP. | May become vague if used as a dumping ground; needs concise rules. | One canonical instruction file for ChatGPT/Codex/other coding agents; repo-native coordination layer. | Immediate Bricolage need. Create and keep powerful, not bureaucratic. |
 | A2A / Agent2Agent | Multi-Agent Coordination; Protocols; Infrastructure | Open protocol for agent-to-agent discovery, messaging, and task coordination across systems/vendors; Linux Foundation governance. | Young ecosystem; risk of premature protocol complexity. | External agent interoperability; agent discovery; message/task envelope schemas; vendor-neutral multi-agent protocol boundary. | Important for future interoperability, not necessarily core v0 runtime. |
+| ModelScope-Agent | Tooling; Models, Context & Inference; Knowledge & Retrieval; Evaluation | Customizable open-source LLM agent framework connecting open-source LLMs, model APIs, common APIs, tool-use data collection, tool retrieval/registration, memory control, model training, evaluation, and 1000+ public AI models in ModelScopeGPT. | Older generation; ecosystem-specific; broader than Bricolage may need. | Tool retrieval/registration at scale; model/tool marketplace; open-model controller integration; tool-use data pipeline. | Important large-tool-ecosystem source. Extract tool registry/retrieval and model-API bridging ideas. |
+| Google ADK / Vertex/Gemini Agent Platform | Runtime; Tooling; Evaluation; Infrastructure | Open-source Agent Development Kit plus enterprise platform: Agent Runtime, Identity, Gateway, Registry, low-code Agent Studio, observability, simulation, deployment, and integrations. | Enterprise platform gravity; not all OSS/free; may be too heavy. | Agent gateway/registry concepts; identity boundary; simulation/evaluation environment; deployment path from local to cloud. | Use as reference architecture for platform capabilities, not initial implementation. |
+| Google Antigravity | Software Engineering Agents; Human Interaction; Environment Interaction | Agent-first IDE with editor and manager views; parallel agents across workspaces; verifiable artifacts such as plans, task lists, screenshots, and browser recordings; editor/terminal/browser access. | Proprietary preview; not OSS. | Manager view for parallel agents; artifact-based trust; screenshot/browser-record proof; async coding-agent orchestration. | Strong UX/operation signal even if not source-compatible. Steal the artifact/trust model. |
 | Letta / MemGPT | Memory Systems; Runtime; Human Interaction | Stateful agents with explicit memory architecture; long-running agent identity; separation between context-window management and longer-term memory; memory as first-class agent substrate. | Memory systems can become noisy, expensive, or unreliable without disciplined write/read policies. | Explicit memory layers; memory write policies; persona/identity continuity; archival vs working memory separation. | Core memory inspiration. Must synthesize carefully with repo-native/GitHub memory. |
 | InfiAgent | Memory Systems; Runtime; Context; Knowledge & Retrieval | Infinite-horizon framework that keeps reasoning context bounded by externalizing persistent state into a file-centric state abstraction; reconstructs context from workspace snapshots plus recent action windows. | Research framework; implementation maturity needs inspection. File-state discipline requires strong conventions. | File-centric persistent state; bounded context loop; workspace snapshot reconstruction; long-horizon research state. | Very aligned with ChatGPT/Codex/GitHub cloud workflow. Strong candidate for Bricolage memory/state philosophy. |
 | AutoAgent | Runtime; Skills; Memory; Multi-Agent; Learning | Evolving cognition, contextual decision-making, elastic memory orchestration, closed-loop cognitive evolution, reusable episodic abstraction. | Ambitious and potentially complex; must verify implementation availability and practicality. | Elastic memory orchestrator; cognition update loop; peer/tool capability cognition; compression of redundant trajectories. | Important 2026 adaptive-agent direction. Extract memory/cognition concepts if implementation holds up. |
 | AgentSCOPE | Safety; Privacy; Evaluation; Tooling | Privacy Flow Graph evaluates intermediate information flows across agent pipelines, showing privacy violations can occur inside tool-response/query stages even when final output appears clean. | Privacy evaluation can become heavy; benchmark not runtime. | Boundary-by-boundary privacy flow tracing; tool-response privacy checks; contextual integrity annotations. | Important for personal/conversational agents with email/calendar/files. Use as design warning and targeted check, not bureaucracy. |
 | browser-use / Browser agents | Environment Interaction; Tooling; Human Interaction | Practical browser automation for agents; web interaction as first-class action space; often built on Playwright-style browser control. | Web automation is brittle; prompt injection/security risk; UI variability. | Browser action interface; page-state extraction; human takeover/approval; browser task loop. | High capability per complexity. Needs safety gates around logged-in/sensitive actions. |
 | Playwright | Environment Interaction; Tooling; Evaluation | Mature cross-browser automation API for Chromium/Firefox/WebKit; robust automation substrate; Apache 2.0. | Not an agent framework; low-level automation requires higher-level reasoning wrapper. | Browser execution substrate; deterministic browser actions; screenshots/traces; web task replay. | Likely best low-level browser substrate if Bricolage needs browser actions. |
+| Flowise | Human Interaction; Tooling; Runtime; Knowledge & Retrieval | Popular open-source low-code visual builder for LLM apps/agents; node-based flows; Custom MCP node shows user demand for visual tool wiring. | Serious security history: CVE-2025-59528 from CustomMCP node allowed arbitrary code execution; public internet exposure is dangerous. | Visual node graph ideas; low-code tool composition; warning: never execute user config as code; secure node sandboxing. | Useful as visual-builder reference and major security caution. Do not adopt server-exposed low-code execution casually. |
+| Dify | Human Interaction; Knowledge & Retrieval; Runtime; Agent Platform | Open-source LLM app/agent platform with workflow builder, RAG, model provider abstraction, operations/monitoring, app deployment patterns. | Platform-heavy; may drag product/SaaS assumptions. | Workflow builder; RAG/app deployment model; model-provider abstraction; prompt/app ops patterns. | Large ecosystem worth inspecting, especially for productized workflow/RAG UX. Not core runtime. |
 | E2B / Daytona class | Environment Interaction; Infrastructure; Tooling; Software Engineering Agents | Cloud sandbox/code-interpreter environments for agents, isolated execution, filesystem/process/network boundaries, API-driven workspaces. | Hosted dependency; pricing/limits; OSS status varies by component. | Cloud sandbox abstraction; ephemeral workspaces; code execution service boundary; persistent workspace snapshots. | Important implementation substrate to compare with Codex/OpenHands/Orchard. |
 | OpenClaw | Human Interaction; Skills; Tooling; Environment Interaction | Messaging-first autonomous assistant; local-running agent; extensible skill directory; service integrations; MIT licensed; SKILL.md directory convention; persistent local config/history. | Setup/security risk; unvetted skills are dangerous; reported prompt-injection and malicious skill incidents. | Messaging-first agent UX; skill directory; gateway pattern; skill precedence model; strong warning model for broad tool authority. | High-value conversational UX source and major cautionary case. Steal skills/gateway ideas, not unconstrained authority. |
 | Moltbook / Agent social networks | Multi-Agent Coordination; Human Interaction; Security | API-first agent-only social network; agents communicate, post, vote, and periodically check in; exposes indirect prompt-injection and agent identity/auth risks. | High security risk; not core build. | Agent-to-agent public forum pattern; check-in loop; adversarial-agent environment lessons. | Mostly a cautionary source for untrusted agent-to-agent communication. |
@@ -60,7 +73,6 @@ Bricolage does NOT aim to maximize enterprise abstraction layers, governance bur
 | vLLM | Models, Context & Inference; Infrastructure; Economics | Apache-licensed inference engine with PagedAttention, continuous batching, distributed inference, quantization, and OpenAI-compatible APIs. | Infra-heavy; only needed if serving models directly. | Efficient model serving backend; OpenAI-compatible endpoint abstraction; batching/resource scheduling lessons. | Long-term inference substrate candidate, not initial dependency. |
 | SGLang | Models, Context & Inference; Infrastructure; Runtime | Apache-licensed structured generation language plus runtime; supports structured outputs, speculative decoding, continuous batching, quantization, OpenAI-style APIs, RadixAttention-style KV reuse. | Infra/research complexity; mostly relevant to self-hosted inference. | Structured generation primitives; constrained decoding; parallel control flow; inference-cache reuse concepts. | Long-term inference/cognition optimization source. |
 | Nekro Agent | Tooling; Environment Interaction; Skills; Human Interaction | Extensible AI agent framework for multi-user/chat environments; sandboxed execution; plugin architecture; multimodal interaction; Docker deployment. | Custom license/details need review; chat-platform orientation may not match core build. | Chat-platform agent loop; plugin architecture; sandboxed code execution. | Worth scanning as a chat-native agent pattern. |
-| AutoGPT | Runtime; Tooling; Historical Baseline | Early autonomous goal decomposition with tools, browsing, file management; popularized autonomous agents. | Known issues: loops, hallucination, high cost, brittle autonomy. | Negative lessons: avoid unconstrained loops, avoid vague goal autonomy, require outcome checks. | More useful as a cautionary ancestor than a direct source. |
 
 ---
 
@@ -73,6 +85,9 @@ Bricolage does NOT aim to maximize enterprise abstraction layers, governance bur
 - sandboxed software execution
 - cloud/mobile conversational operation through ChatGPT + Codex + GitHub
 - mandatory execution-grounded verification for code changes
+- hierarchical working memory plus persistent notes for large repos
+- blueprint-first deterministic workflow spine with LLMs as bounded tools
+- evolutionary generate/evaluate/select loops for algorithmic improvement
 - declarative cognitive modules
 - typed/schema-validated agent/tool contracts
 - MCP-style tool boundaries
@@ -81,6 +96,7 @@ Bricolage does NOT aim to maximize enterprise abstraction layers, governance bur
 - browser automation as a first-class environment
 - persistent memory with explicit write/read policies
 - multi-agent role/task coordination only where execution value is real
+- role-specific artifacts and handoff contracts, not roleplay for its own sake
 - repo-native state and knowledge
 - outcome/state-diff evaluation instead of heavy benchmark bureaucracy
 - static graph preflight checks for obvious workflow failures
@@ -90,6 +106,7 @@ Bricolage does NOT aim to maximize enterprise abstraction layers, governance bur
 - provider-normalized message/tool schema
 - intent/effect observability concept
 - structured generation and inference runtime abstractions for later self-hosting
+- visual workflow builders as UX references, not necessarily runtime foundations
 
 ## 2. Bricolage should avoid
 
@@ -103,25 +120,31 @@ Bricolage does NOT aim to maximize enterprise abstraction layers, governance bur
 - autonomous repo/tool ingestion without license/security review
 - broad personal-service authority without explicit scope and human control
 - agent-to-agent exposure to untrusted content without prompt-injection boundaries
+- publicly exposed low-code execution servers without strong sandboxing
 
 ## 3. Bricolage should aggressively adopt/synthesize
 
 - ChatGPT/Codex/GitHub as the first operational substrate
 - OpenHands-style execution/workspace/sandbox primitives
+- Confucius-style hierarchical working memory and persistent notes
 - AgentForge-style execution-grounded coding verification
 - InfiAgent-style file-centric state externalization
+- Blueprint-first deterministic workflow for strict procedures
 - Pydantic AI / Orchestral-style typed tool/result contracts
 - DSPy-style declarative reasoning modules where repeatable reasoning matters
 - LangGraph/AgentGit-style state graph and branchable trajectory concepts
 - MCP as the default tool/data connector boundary
 - AGENTS.md as the repo-native Codex/agent control file
-- CrewAI/AutoGen multi-agent ideas only where multiple agents truly add value
+- MetaGPT-style artifact handoffs only where useful
+- CrewAI/CAMEL/AutoGen multi-agent ideas only where multiple agents truly add value
 - Letta/MemGPT-style explicit memory layers, adapted to repo-native persistence
 - browser-use/Playwright-style browser actions for real-world task automation
 - Agent-Diff-style state-diff success contracts
 - Agentproof-style static graph sanity checks
 - Orchard/E2B/Daytona-style environment/harness layer
 - OpenClaw-style skill directories with explicit safety/permission constraints
+- Google Antigravity-style verifiable artifacts for trust
+- ModelScope-Agent-style tool registry/retrieval for large capability libraries
 
 ---
 
@@ -131,25 +154,38 @@ Every repository or framework should be evaluated according to capability densit
 
 ---
 
-# Research Source Notes - Passes 1-4
+# Research Source Notes - Passes 1-5
 
 These notes capture the source-grounded basis for the population passes. They are not exhaustive and should be replaced or expanded with repo-level citations as deeper inspection continues.
 
 - OpenHands SDK paper: composable software-agent SDK, sandboxed execution, local-to-remote portability, REST/WebSocket services, multiple user interfaces, model-agnostic routing, lifecycle control, security analysis, SWE-Bench/GAIA evaluation.
 - Codex public/current summaries: ChatGPT web/mobile/GitHub/IDE/cloud coding-agent workflows, issue/PR assignment, cloud execution, and broader enterprise-agent positioning.
+- Confucius Code Agent paper: industrial-scale OSS coding agent, hierarchical working memory, persistent notes, modular extension, meta-agent build-test-improve loop, SWE-Bench-Pro performance.
 - DSPy paper: declarative modules, LM pipelines as computational graphs, compiler/optimizer, metric-driven improvement, prompt/program abstraction.
+- Blueprint First / Source Code Agent paper: deterministic workflow blueprint, LLM as bounded subtask tool, tau-bench improvement and efficiency.
+- AlphaEvolve public sources: LLM plus evolutionary computation for algorithm discovery using evaluation functions and variant selection.
 - Pydantic AI public docs/summaries: type-safe Python agent framework, structured outputs, dependency injection, validation, provider abstraction.
 - Semantic Kernel public docs/summaries: Microsoft agent SDK, plugins/functions, planners, memory/connectors, MCP and Azure/OpenAI/local integrations.
 - CrewAI public summary: open-source Python multi-agent framework with crews, roles, goals, tasks, delegation, tools, memory, knowledge sources, Flows, MIT license, and active 2026 release line.
+- CAMEL public repo/papers: communicative agents, role-playing, agent societies, simulations, multi-agent research.
+- MetaGPT public repo/papers: software-company multi-agent metaphor, SOPs, role-specific artifacts, software generation.
 - AutoGen Studio paper: declarative JSON specs, no-code multi-agent workflow authoring, debugging/evaluation UI, reusable components.
+- AutoGPT public summaries: early autonomous agent, MIT license, loops/hallucinations/cost failures, Forge/platform lineage.
+- BabyAGI public sources: minimal task creation/prioritization/execution loop and memory.
+- SuperAGI public sources: autonomous agent platform, GUI, provisioning, toolkits, memory/vector DBs, marketplace-style extensions.
 - AgentSPEX paper: typed workflow specs, branching/loops, explicit state, tools, sandboxing, checkpointing, verification, logging, visual editor.
 - Agentproof paper: static verification of workflow graphs across LangGraph, CrewAI, AutoGen, and Google ADK; structural checks and temporal policy automata.
 - AgentGit paper: Git-like commit/revert/branching for multi-agent workflows, trajectory comparison, reduced redundant computation/token usage.
 - MCP public sources: open standard for model-tool/data integration, JSON-RPC, broad adoption by OpenAI/Google DeepMind, ChatGPT app support, reference servers.
 - AGENTS.md public reports: repo-native standard for coordinating AI coding agents, contributed to Linux Foundation/AAIF, broad project adoption.
 - A2A public sources: open protocol for agent communication, discovery, messaging, task coordination, Linux Foundation governance.
+- ModelScope-Agent paper: customizable open-source LLM agent framework, tool retrieval/registration, memory control, training/evaluation, 1000+ public AI model integration.
+- Google ADK/Gemini Enterprise public sources: Agent Development Kit, Agent Runtime, Identity, Gateway, Registry, Agent Studio, observability, simulation, deployment.
+- Google Antigravity public sources: agent-first IDE, manager/editor views, parallel agents, verifiable artifacts such as plans/screenshots/browser recordings.
 - AgentSCOPE paper: contextual privacy and Privacy Flow Graphs for intermediate agent/tool information flows.
 - Playwright public sources: mature Apache 2.0 browser automation substrate across Chromium, Firefox, and WebKit.
+- Flowise public/security reports: low-code LLM/agent builder; CustomMCP node vulnerability CVE-2025-59528 enabled arbitrary code execution in exposed instances.
+- Dify public docs/summaries: open-source LLM app/agent platform, workflow builder, RAG, model providers, observability/operations.
 - OpenClaw/Moltbook public sources: messaging-first autonomous assistant, MIT license, local gateway, SKILL.md directory convention, broad skill library, and significant prompt-injection/malicious-skill warnings.
 - AutoAgent paper: evolving cognition, contextual decision-making, elastic memory orchestration, reusable episodic abstractions, closed-loop cognitive evolution.
 - InfiAgent paper: infinite-horizon file-centric state abstraction, bounded context loop, workspace snapshots plus recent action windows.
@@ -165,7 +201,6 @@ These notes capture the source-grounded basis for the population passes. They ar
 - Ollama public summary: MIT local/cloud model runtime with CLI, REST API, model management, integrations with coding assistants and agents.
 - vLLM public summary: Apache 2.0 inference engine with PagedAttention, batching, distributed inference, quantization, OpenAI-compatible APIs.
 - SGLang public summary: Apache 2.0 structured generation language/runtime with constrained decoding, continuous batching, speculative execution, KV-cache reuse.
-- AutoGPT public summary: historically important autonomous agent, but useful mainly as cautionary evidence for loop/cost/hallucination failure modes.
 
 ---
 
